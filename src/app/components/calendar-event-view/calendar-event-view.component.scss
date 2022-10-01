@@ -1,0 +1,94 @@
+:host {
+  width: 100%;
+  height: fit-content;
+  position: relative;
+}
+
+.calendar-event-wrapper {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  padding: 5px;
+}
+
+.calendar-event-header {
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  .month-name {
+    color: blue;
+    font-size: 20px;
+  }
+}
+
+.calendar-event-body {
+  .week-days {
+    margin-bottom: 5px;
+    justify-content: space-between;
+    .week {
+      border: 1px solid red;
+      width: calc(100% / 7);
+      text-align: right;
+    }
+  }
+}
+
+.tile-wrapper {
+  cursor: pointer;
+}
+
+.appointment {
+  cursor: grab;
+  border-radius: 3px;
+  padding: 3px;
+  background-color: cadetblue;
+  font-size: 14px;
+  color: white;
+  margin: 1px;
+}
+
+
+::ng-deep.mat-grid-tile {
+  border: 1px solid green;
+}
+
+.delete {
+  cursor: pointer;
+}
+
+.appointments-wrapper {
+  height: 100%;
+}
+
+.tile-day-disabled {
+  opacity: 0.5;
+  font-weight: normal !important;
+}
+
+.tile-day {
+  color: black;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.2;
+}
+
+.change-btn {
+  font-size: 20px;
+  padding: 2px;
+  background-color: red;
+  cursor: pointer;
+}
+
+.change-month-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 5px;
+  margin-left: 5px;
+  color: black;
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.2;
+}

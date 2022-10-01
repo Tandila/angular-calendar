@@ -1,1 +1,30 @@
-<p>add-appointment-modal works!</p>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Modal title</h4>
+    <button (click)="modal.dismiss('Cross click')" aria-label="Close" class="btn-close" type="button"></button>
+  </div>
+  <div class="modal-body">
+
+    <form [formGroup]="appointmentsFormGroup" class="form-wrapper d-flex flex-column">
+      <input placeholder="title" formControlName="title" type="text" />
+      <mat-form-field appearance="fill">
+        <mat-label>Start Time</mat-label>
+        <input [matDatepicker]="start" formControlName="startDate" matInput [disabled]="true">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle [for]="start" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #start></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>End Time</mat-label>
+        <input [matDatepicker]="end" formControlName="endDate" matInput [disabled]="true">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle [for]="end" matSuffix></mat-datepicker-toggle>
+        <mat-datepicker #end></mat-datepicker>
+      </mat-form-field>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-light" type="button" (click)="addAppointment(); modal.dismiss()" [disabled]="appointmentsFormGroup.invalid">Add</button>
+    <button (click)="modal.close('Close click')" class="btn btn-light" type="button">Close</button>
+  </div>
+</ng-template>

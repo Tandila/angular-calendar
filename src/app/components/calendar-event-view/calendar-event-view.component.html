@@ -1,1 +1,44 @@
-<p>calendar-event-view works!</p>
+<div class="calendar-event-wrapper">
+  <div class="calendar-event-header">
+    <div class="month-name">{{ currentDate | date: 'YYY-MMMM' }}</div>
+    <div class="change-month d-flex">
+      <div (click)="onDateChange(false)" class="btn btn-danger">
+        <i class="bi bi-arrow-left"></i>
+      </div>
+      <div class="change-month-text">Change Month</div>
+      <button (click)="onDateChange(true)" class="btn btn-danger">
+        <i class="bi bi-arrow-right"></i>
+      </button>
+    </div>
+  </div>
+  <div class="calendar-event-body d-flex flex-column w-100">
+    <div *ngIf="weeks" class="week-days d-flex">
+      <div *ngFor="let week of weeks" class="week">
+        {{week}}
+      </div>
+    </div>
+    <div class="appointments-wrapper">
+      <mat-grid-list [cols]="weeks.length">
+        <mat-grid-tile *ngFor="let day of calendar; let idx = index">
+          <div (click)="openAddAppointmentModal(day.date)" class="tile-wrapper d-flex flex-column w-100 h-100 p-2">
+            <div [ngClass]="{'tile-day-disabled' : !day.isPartOfCurrentMonth}"
+                 class="tile-day d-flex flex-row justify-content-end align-items-center">{{day.date.getDate()}}</div>
+            <div (cdkDropListDropped)="dropped($event)" [cdkDropListConnectedTo]="calendar | transformNumbersToString" cdkDropList
+                 class="appointments-wrapper d-flex flex-column" id="{{day.date}}">
+              <ng-container *ngFor="let appointment of getAppointments(day.date)">
+                <div [cdkDragData]="appointment" cdkDrag class="appointment d-flex justify-content-between">
+                  {{appointment.title}}
+                  <div (click)="deleteAppointment(appointment.id); $event.stopPropagation();" class="delete">
+                    <i class="bi bi-x-lg"></i>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </div>
+  </div>
+</div>
+
+<app-add-appointment-modal #addAppointmentModalComponent></app-add-appointment-modal>
